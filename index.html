@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Three.js Quest Test</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.min.js"></script>
+</head>
+
+<body>
+
+<div id="status"
+     style="position:fixed;
+            top:10px;
+            left:10px;
+            z-index:1000;
+            background:white;
+            color:black;
+            padding:15px;
+            font-family:Arial;
+            font-size:20px;">
+    JavaScript is working
+</div>
+
+<script>
+
+const scene = new THREE.Scene();
+
+scene.background = new THREE.Color(1, 0, 0);
+
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+
+camera.position.z = 5;
+
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+
+const material = new THREE.MeshBasicMaterial({
+    color: 0x0000ff
+});
+
+const cube = new THREE.Mesh(
+    geometry,
+    material
+);
+
+scene.add(cube);
+
+const renderer = new THREE.WebGLRenderer();
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+document.body.appendChild(
+    renderer.domElement
+);
+
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    renderer.render(scene, camera);
+}
+
+animate();
+
+document.getElementById("status").innerHTML =
+    "Three.js is working";
+
+</script>
+
+</body>
+</html>
