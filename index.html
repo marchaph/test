@@ -25,57 +25,33 @@
 
 <script>
 
-const scene = new THREE.Scene();
+console.log("1. JavaScript started");
 
-scene.background = new THREE.Color(1, 0, 0);
+const canvas = document.createElement("canvas");
 
-const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-);
+document.body.appendChild(canvas);
 
-camera.position.z = 5;
+console.log("2. Canvas created");
 
-const geometry = new THREE.BoxGeometry(2, 2, 2);
+const gl = canvas.getContext("webgl2");
 
-const material = new THREE.MeshBasicMaterial({
-    color: 0x0000ff
-});
+if (!gl) {
+    document.getElementById("status").innerHTML =
+        "❌ WebGL2 context could NOT be created";
+    console.log("WebGL2 FAILED");
+} else {
 
-const cube = new THREE.Mesh(
-    geometry,
-    material
-);
+    console.log("3. WebGL2 context created");
 
-scene.add(cube);
+    document.getElementById("status").innerHTML =
+        "✅ WebGL2 context created";
 
-const renderer = new THREE.WebGLRenderer();
+    gl.clearColor(1.0, 0.0, 0.0, 1.0);
 
-renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
-document.body.appendChild(
-    renderer.domElement
-);
-
-function animate() {
-
-    requestAnimationFrame(animate);
-
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-
-    renderer.render(scene, camera);
+    console.log("4. Canvas cleared red");
 }
-
-animate();
-
-document.getElementById("status").innerHTML =
-    "Three.js is working";
 
 </script>
 
