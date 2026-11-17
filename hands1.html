@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Day 1 - Quest 3 Hand Tracking</title>
+    <!-- A-Frame 1.6.0+ includes the latest WebXR hand-tracking support -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <!-- webxr="optionalFeatures: hand-tracking" explicitly requests hand data -->
+    <a-scene webxr="optionalFeatures: hand-tracking;">
+      
+      <!-- Environment for spatial reference -->
+      <a-sky color="#1a1a2e"></a-sky>
+      <a-plane position="0 0 -2" rotation="-90 0 0" width="6" height="6" color="#2e2e4e"></a-plane>
+      
+      <!-- Reference table at waist height so students can gauge reach -->
+      <a-box position="0 0.8 -0.6" width="1.2" height="0.05" depth="0.6" color="#4cc9f0"></a-box>
+
+      <!-- Left Hand: Rendered as a solid 3D rigged hand mesh -->
+      <a-entity 
+        id="leftHand" 
+        hand-tracking-controls="hand: left; modelStyle: mesh; modelColor: #ffbe0b;">
+      </a-entity>
+
+      <!-- Right Hand: Rendered as 25 individual joint spheres -->
+      <a-entity 
+        id="rightHand" 
+        hand-tracking-controls="hand: right; modelStyle: dots; modelColor: #fb5607;">
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
